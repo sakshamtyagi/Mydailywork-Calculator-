@@ -8,6 +8,9 @@ This project showcases a simple yet functional calculator built with HTML, CSS, 
 - **Earnings Calculation:** Calculate total earnings based on input hours and specified hourly rates.
 - **Responsive Design:** Works seamlessly on various devices and screen sizes.
 
+  <img width="932" alt="Project1" src="https://github.com/user-attachments/assets/dc79a91f-e67e-44d1-a196-9387c5534615">
+
+
 ## Technologies Used
 
 - HTML
