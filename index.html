@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #f3ec78, #af4261);
+            animation: gradient 5s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .calculator {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            background: #333;
+            color: #fff;
+            font-size: 2em;
+            text-align: right;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 20px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #d0d0d0;
+            transform: scale(1.05);
+        }
+
+        .operator {
+            background: #f57f17;
+            color: #fff;
+        }
+
+        .operator:hover {
+            background: #f57f17;
+        }
+
+        .equal {
+            background: #0d47a1;
+            color: #fff;
+            grid-column: span 2;
+        }
+
+        .equal:hover {
+            background: #0c3b8b;
+        }
+
+        #clear, #delete {
+            background: #d32f2f;
+            color: #fff;
+        }
+
+        #clear:hover, #delete:hover {
+            background: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display"></div>
+        <div class="buttons">
+            <button class="btn" id="clear">C</button>
+            <button class="btn" id="delete">←</button>
+            <button class="btn operator" data-operator="/">÷</button>
+            <button class="btn operator" data-operator="*">×</button>
+
+            <button class="btn" data-number="7">7</button>
+            <button class="btn" data-number="8">8</button>
+            <button class="btn" data-number="9">9</button>
+            <button class="btn operator" data-operator="-">-</button>
+
+            <button class="btn" data-number="4">4</button>
+            <button class="btn" data-number="5">5</button>
+            <button class="btn" data-number="6">6</button>
+            <button class="btn operator" data-operator="+">+</button>
+
+            <button class="btn" data-number="1">1</button>
+            <button class="btn" data-number="2">2</button>
+            <button class="btn" data-number="3">3</button>
+            <button class="btn equal" id="equal">=</button>
+
+            <button class="btn" data-number="0">0</button>
+            <button class="btn" data-number=".">.</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const display = document.getElementById('display');
+            const buttons = Array.from(document.getElementsByClassName('btn'));
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    if (this.id === 'clear') {
+                        display.innerText = '';
+                    } else if (this.id === 'delete') {
+                        display.innerText = display.innerText.slice(0, -1);
+                    } else if (this.id === 'equal') {
+                        try {
+                            display.innerText = eval(display.innerText.replace('÷', '/').replace('×', '*').replace('%', '/100*'));
+                        } catch {
+                            display.innerText = 'Error';
+                        }
+                    } else {
+                        display.innerText += this.innerText;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
